@@ -1,0 +1,39 @@
+body{
+  display: flex;
+  justify-content: center;
+}
+button{
+  width: 4rem;
+  height: 4rem;
+  font-size: 1.5rem;
+  margin: 1rem 1rem 0.45rem 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 3rem;
+}
+button:hover{
+  cursor: pointer;
+}
+
+.container-calculadora{
+  background: #1C1C1C;
+  border-radius: 1rem;
+  width: 400px;
+  height: 600px;
+  margin-top: 3rem;
+}
+.operacoes{
+  background-color: #FF9500;
+  color: #FFF;
+}
+.acao{
+  background-color: #D4D4D2;
+}
+.number{
+  background-color: #505050;
+  color: #FFF;
+}
+
+.number0{
+  flex-grow: 1;
+}
