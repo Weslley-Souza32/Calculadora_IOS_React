@@ -15,25 +15,14 @@ button:hover{
   cursor: pointer;
 }
 
-.container-calculadora{
-  background: #1C1C1C;
-  border-radius: 1rem;
-  width: 400px;
-  height: 600px;
-  margin-top: 3rem;
-}
-.operacoes{
+.operation{
   background-color: #FF9500;
   color: #FFF;
 }
-.acao{
+.action{
   background-color: #D4D4D2;
 }
 .number{
   background-color: #505050;
   color: #FFF;
-}
-
-.number0{
-  flex-grow: 1;
 }
