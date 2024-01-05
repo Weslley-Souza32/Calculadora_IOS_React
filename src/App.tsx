@@ -9,33 +9,65 @@ function App() {
   const [result, setResult] = useState('')
 
   const handleButtonClicked = (text: string, type: string) => {
-    if (type === 'operation' && text === '=') {
-      setTextDisplay(result)
-    } else if (type === 'operation') {
-      // Daqui temos que fazer outras logicas para colocar armazenar os dados da conta: primeiro numero + segundo numero
-      // Deixei a funcao que realiza a operação e uma funcção que seta o resultado no final (setResult) quando o usuario 
-      // clicar no botão de igual
-      // Voce precisa agora a partir disso fazer com que as operações sejam realizadas e mostradas no display.
+    if (type === 'operation') {
+      if (text === '=') {
+        // Realiza o cálculo quando o botão "=" é clicado
+        const newResult = operation(result, textDisplay);
+        setResult(newResult.toString());
+        setTextDisplay(newResult.toString());
+      } else {
+        // Armazena o primeiro número e o operador
+        setResult(textDisplay);
+        setTextDisplay('');
+      }
+    } else if (type === 'action' && text === 'AC') {
+      // Limpa o display
+      setTextDisplay('');
+      setResult('');
+    } else if (type === 'action' && text === '+/-') {
+      // Inverte o sinal do número exibido no display
+      setTextDisplay((prevText) => {
+        if (prevText.charAt(0) === '-') {
+          return prevText.slice(1);
+        } else {
+          return `-${prevText}`;
+        }
+      });
+    } else if (type === 'action' && text === '%') {
+      // Calcula a porcentagem do número exibido no display
+      setTextDisplay((prevText) => {
+        const number = parseFloat(prevText);
+        return (number / 100).toString();
+      });
     } else {
-      setTextDisplay((prevState) => prevState + text)
+      setTextDisplay((prevState) => prevState + text);
     }
-    
-  }
+  };
 
-  const operation = (currentNumber: string, operation: string) => {
-    switch (operation) {
+  const operation = (currentNumber: string, operator: string) => {
+    if (textDisplay === '') {
+      return currentNumber;
+    }
+  
+    const num1 = parseFloat(currentNumber);
+    const num2 = parseFloat(textDisplay);
+  
+    switch (operator) {
       case '+':
-        return parseInt(currentNumber, 10) + parseInt(textDisplay, 10)
+        return (num1 + num2).toString();
       case '-':
-        return parseInt(currentNumber, 10) - parseInt(textDisplay, 10)
+        return (num1 - num2).toString();
       case '*':
-        return parseInt(currentNumber, 10) * parseInt(textDisplay, 10)
+        return (num1 * num2).toString();
       case '/':
-        return parseInt(currentNumber, 10) / parseInt(textDisplay, 10)
+        if (num2 === 0) {
+          return 'Erro: Divisão por zero';
+        }
+        return (num1 / num2).toString();
       default:
         throw new Error('Operação inválida.');
     }
-  }
+  };
 
   return (
     <div className="container-calculadora">
