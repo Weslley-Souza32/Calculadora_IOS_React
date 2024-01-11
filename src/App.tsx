@@ -7,16 +7,18 @@ import Display from './components/Display';
 function App() {
   const [textDisplay, setTextDisplay] = useState('')
   const [result, setResult] = useState('')
+  const [oparationType, setOperationType] = useState('')
 
   const handleButtonClicked = (text: string, type: string) => {
     if (type === 'operation') {
       if (text === '=') {
         // Realiza o cálculo quando o botão "=" é clicado
-        const newResult = operation(result, textDisplay);
+        const newResult = operation(result);
         setResult(newResult.toString());
         setTextDisplay(newResult.toString());
       } else {
         // Armazena o primeiro número e o operador
+        setOperationType(text)
         setResult(textDisplay);
         setTextDisplay('');
       }
@@ -44,7 +46,7 @@ function App() {
     }
   };
 
-  const operation = (currentNumber: string, operator: string) => {
+  const operation = (currentNumber: string) => {
     if (textDisplay === '') {
       return currentNumber;
     }
@@ -52,7 +54,7 @@ function App() {
     const num1 = parseFloat(currentNumber);
     const num2 = parseFloat(textDisplay);
   
-    switch (operator) {
+    switch (oparationType) {
       case '+':
         return (num1 + num2).toString();
       case '-':
